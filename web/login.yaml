@@ -1,0 +1,10 @@
+appId: com.swaglabsmobileapp
+---
+- launchApp
+- tapOn: "Username"
+- inputText: "standard_user"
+- tapOn: "Password"
+- inputText: "secret_sauce"
+- tapOn: "LOGIN"
+- assertVisible: "PRODUCTS"
+- stopApp
