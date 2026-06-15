@@ -1,0 +1,46 @@
+appId: com.talknow.free.text.me.now.second.phone.number.burner.app
+---
+- launchApp:
+    clearState: true
+
+- runFlow: 
+    when: 
+        visible: "Log in / Sign up"
+    commands:
+        - tapOn: "Log in / Sign up"
+
+- runFlow: 
+    when: 
+        visible: "Sign in with Google"
+    commands: 
+        - tapOn: "Sign in with Google"
+        - tapOn:
+            text: ".*@.*"
+            index: 0
+
+- extendedWaitUntil:
+    visible: "Call"
+    timeout: 90000
+- tapOn: "Call"
+- tapOn: "+1"
+- longPressOn:
+    id: "ivDial"
+    index: 13
+- inputText: "+16502234107"
+- tapOn: "Back"
+- tapOn:
+    id: "ivDial"
+    index: 12
+- tapOn:
+    point: 52%,82%
+
+- extendedWaitUntil:
+    visible: "History"
+    timeout: 10000
+- tapOn: "History"
+
+- assertVisible: "Outbound"
+- tapOn:
+    id: "ivHistoryInfo"
+- assertVisible: "+1 650-223-4107"
+
