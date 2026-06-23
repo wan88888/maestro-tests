@@ -1,0 +1,7 @@
+appId: com.talknow.free.text.me.now.second.phone.number.burner.app
+---
+- tapOn: "Log in / Sign up"
+- tapOn: "Sign in with Google"
+- tapOn:
+    id: "container"
+    index: 1

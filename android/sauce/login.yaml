@@ -5,6 +5,6 @@ appId: com.swaglabsmobileapp
 - inputText: "standard_user"
 - tapOn: "Password"
 - inputText: "secret_sauce"
-- tapOn: "LOGIN"
+- tapOn: "test-LOGIN"
 - assertVisible: "PRODUCTS"
 - stopApp

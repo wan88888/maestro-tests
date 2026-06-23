@@ -1,10 +1,10 @@
-appId: com.swaglabsmobileapp
+url: https://www.saucedemo.com
 ---
 - launchApp
 - tapOn: "Username"
 - inputText: "standard_user"
 - tapOn: "Password"
 - inputText: "secret_sauce"
-- tapOn: "LOGIN"
+- tapOn: "Login"
 - assertVisible: "PRODUCTS"
 - stopApp

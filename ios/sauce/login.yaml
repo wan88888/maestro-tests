@@ -1,4 +1,4 @@
-appId: com.swaglabsmobileapp
+appId: com.saucelabs.SwagLabsMobileApp
 ---
 - launchApp
 - tapOn: "Username"

@@ -1,51 +1,26 @@
 appId: com.talknow.free.text.me.now.second.phone.number.burner.app
 ---
-- launchApp:
-    clearState: true
-- runFlow: 
-    when: 
+- launchApp
+
+- runFlow:
+    when:
         visible: "Log in / Sign up"
-    commands:
-        - tapOn: "Log in / Sign up"
-
-- runFlow: 
-    when: 
-        visible: "Sign in with Google"
-    commands: 
-        - tapOn: "Sign in with Google"
-        - tapOn:
-            text: ".*@.*"
-            index: 0
-
-- extendedWaitUntil:
-    visible: "Message"
-    timeout: 90000
+    file: login.yaml
+    
 - tapOn: "Message"
-- tapOn: "201-555-0123"
+- tapOn:
+    id: "searchLayout"
 - inputText: "6502234107"
 - tapOn: "Type your message here"
 - inputText: "hello"
 - tapOn:
     id: "btnSendMessage"
 
-- extendedWaitUntil:
-    visible: 
-        id: "btnSendImage"
-    timeout: 10000
 - tapOn:
     id: "btnSendImage"
 - tapOn: "Photos"
-- extendedWaitUntil:
-    visible:
-        index: 0 
-    timeout: 10000
 - tapOn:
-    index: 0  
-
-- extendedWaitUntil:
-    visible: 
-        id: "ivBack"
-    timeout: 10000
+    id: "icon_thumbnail"
 - tapOn:
     id: "ivBack"
 
@@ -53,13 +28,3 @@ appId: com.talknow.free.text.me.now.second.phone.number.burner.app
 - tapOn: "Message"
 - assertVisible:
     id: "clHistoryContent"
-- assertVisible: "[image]"
-- tapOn:
-    id: "clHistoryContent"
-- assertVisible: "hello"
-
-
-
-
-
-
