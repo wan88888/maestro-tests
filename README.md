@@ -1,47 +1,51 @@
 # maestro-tests
 
-[Maestro](https://maestro.mobile.dev/) E2E 测试集合，按 App 与平台分目录存放。
+[Maestro](https://maestro.mobile.dev/) E2E 测试集合，按平台与 App 分目录存放。
 
 ## 目录结构
 
 ```
 maestro-tests/
 ├── android/
-│   ├── textnum/                        # TextNum App（Android）
-│   │   ├── textnum_login.yaml          # 子 flow：Google 登录
-│   │   ├── call_test.yaml
-│   │   └── message_test.yaml
-│   └── sauce/                          # Sauce Labs 演示（Android）
-│       └── android_sauce_login.yaml
-├── ios/
+│   ├── textnum/
+│   │   ├── login.yaml           # 子 flow：Google 登录
+│   │   ├── call.yaml
+│   │   └── message.yaml
+│   ├── esimnum/
+│   │   ├── login.yaml
+│   │   ├── add_creditcard.yaml
+│   │   └── user_purchase.yaml
 │   └── sauce/
-│       └── ios_sauce_login.yaml
+│       └── login.yaml
+├── ios/
+│   ├── esimnum/
+│   │   └── checkout.yaml
+│   └── sauce/
+│       └── login.yaml
 └── web/
+    ├── esimnum/
+    │   └── checkout.yaml
     └── sauce/
-        └── web_sauce_login.yaml
+        └── login.yaml
 ```
 
 ## 命名约定
 
-所有 flow 文件使用 `{app}_{purpose}.yaml`，**不再使用通用的 `login.yaml`**，避免跨目录重名：
+路径为 `{platform}/{app}/{scenario}.yaml`，**文件名只写场景名**，App 与平台由目录区分。
 
-| 文件 | 目标 |
+| 路径 | 说明 |
 |------|------|
-| `android/textnum/textnum_login.yaml` | TextNum — Google 登录子 flow |
-| `android/sauce/android_sauce_login.yaml` | Swag Labs Android — `com.swaglabsmobileapp` |
-| `ios/sauce/ios_sauce_login.yaml` | Swag Labs iOS — `com.saucelabs.SwagLabsMobileApp` |
-| `web/sauce/web_sauce_login.yaml` | Sauce Demo 网站 — `https://www.saucedemo.com` |
+| `android/textnum/call.yaml` | TextNum — 拨号 + 挂断 + 历史记录 |
+| `android/textnum/message.yaml` | TextNum — 发短信/图片 + 历史记录 |
+| `android/textnum/login.yaml` | TextNum — Google 登录子 flow |
+| `android/esimnum/user_purchase.yaml` | eSIMnum Android — 购买套餐（支持 `COUNTRY`） |
+| `android/sauce/login.yaml` | Swag Labs Android 冒烟 |
+| `ios/esimnum/checkout.yaml` | eSIMnum Safari — 结账页未登录拦截 |
+| `ios/sauce/login.yaml` | Swag Labs iOS 冒烟 |
+| `web/esimnum/checkout.yaml` | eSIMnum Web — 结账页未登录拦截 |
+| `web/sauce/login.yaml` | Sauce Demo 网站冒烟 |
 
-## 子 flow 不会混用
-
-Maestro 解析 `file: xxx.yaml` 时，路径**相对于当前 flow 文件所在目录**，不会在项目内全局搜索。
-
-| 引用方 | 实际加载的文件 |
-|--------|----------------|
-| `android/textnum/call_test.yaml` → `textnum_login.yaml` | `android/textnum/textnum_login.yaml` |
-| `android/textnum/message_test.yaml` → `textnum_login.yaml` | `android/textnum/textnum_login.yaml` |
-
-Sauce 各平台的 login flow 均为独立文件，互不引用。
+同目录下多个 `login.yaml`（如 `android/textnum/login.yaml` 与 `android/sauce/login.yaml`）**不会混用**：`runFlow` 的 `file` 相对于当前 flow 所在目录解析。
 
 ## 运行方式
 
@@ -50,38 +54,52 @@ Sauce 各平台的 login flow 均为独立文件，互不引用。
 ### TextNum（Android）
 
 ```bash
-maestro test android/textnum/call_test.yaml
-maestro test android/textnum/message_test.yaml
-maestro test android/textnum/textnum_login.yaml
+maestro test android/textnum/call.yaml
+maestro test android/textnum/message.yaml
+maestro test android/textnum/login.yaml
 ```
 
-`call_test.yaml` / `message_test.yaml` 使用 `launchApp`（不清除状态）。仅当界面出现「Log in / Sign up」时才执行 `textnum_login.yaml`。
+`call.yaml` / `message.yaml` 在出现「Log in / Sign up」时执行同目录 `login.yaml`。
 
-### Sauce Labs 演示（冒烟）
+### eSIMnum（Android App）
 
 ```bash
-maestro test android/sauce/android_sauce_login.yaml
-maestro test ios/sauce/ios_sauce_login.yaml
-maestro test web/sauce/web_sauce_login.yaml
+maestro test android/esimnum/user_purchase.yaml
+maestro test -e COUNTRY="Japan" android/esimnum/user_purchase.yaml
+```
+
+### eSIMnum（Web）
+
+```bash
+maestro test -p web --screen-size 1920x1080 web/esimnum/checkout.yaml
+maestro test -p web -e COUNTRY="Japan" web/esimnum/checkout.yaml
+```
+
+Web 搜索结果用 `css` 定位，见 `checkout.yaml`。
+
+### eSIMnum（iOS Safari）
+
+```bash
+maestro test ios/esimnum/checkout.yaml
+```
+
+### Sauce Labs 演示
+
+```bash
+maestro test android/sauce/login.yaml
+maestro test ios/sauce/login.yaml
+maestro test -p web web/sauce/login.yaml
 ```
 
 ## 编写约定
 
-1. **文件命名**：`{app}_{purpose}.yaml`（如 `textnum_login.yaml`、`android_sauce_login.yaml`）。
-2. **目录命名**：全小写（如 `textnum/`，不用 `TextNum/`）。
-3. **相对路径引用**：`runFlow` 的 `file` 只写同目录文件名。
-4. **条件登录**：主 flow 用 `when: visible: "Log in / Sign up"` 包裹登录子 flow，支持已登录态复跑。
+1. **文件命名**：`{scenario}.yaml`，目录已表达平台与 App。
+2. **目录命名**：全小写（`textnum/`、`esimnum/`）。
+3. **子 flow 引用**：`runFlow` 的 `file` 只写同目录文件名（如 `login.yaml`）。
+4. **条件步骤**：用 `when` 跳过登录、Cookie 等可选 UI。
+5. **Web 视口**：无最大化选项，用 `--screen-size 1920x1080` 固定视口。
 
 ## 依赖与前提
 
-- **TextNum**：设备已登录 Google 账号；拨号/短信测试需真机或具备相应能力的模拟环境。
-- **Sauce Demo**：使用标准账号 `standard_user` / `secret_sauce`（已写在 flow 中）。
-
-## 关于目录大小写
-
-Git 区分路径大小写，macOS 默认文件系统不区分。若远程仓库显示 `TextNum/` 而本地是 `textnum/`，需用 `git mv` 两步重命名后提交，远程才会更新：
-
-```bash
-git mv android/TextNum android/textnum_tmp
-git mv android/textnum_tmp android/textnum
-```
+- **TextNum**：设备已登录 Google 账号；拨号/短信需真机或具备相应能力的模拟环境。
+- **Sauce Demo**：账号 `standard_user` / `secret_sauce`（已写在 flow 中）。

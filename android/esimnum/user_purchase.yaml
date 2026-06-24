@@ -1,0 +1,39 @@
+appId: com.esim.free.travel.virtual.sim.esimnum.mobile
+env:
+  COUNTRY: ${COUNTRY || "United States"}
+---
+- launchApp
+
+- runFlow:
+    when:
+        visible: "Continue With Google"
+    file: login.yaml
+
+- tapOn: "Choose your destination"
+- inputText: ${COUNTRY}
+- hideKeyboard
+- tapOn:
+    text: ${COUNTRY}
+    index: 1
+- assertVisible: "Choose A Plan To Start"
+
+- tapOn:
+    id: "clDetails"
+- tapOn: "CONTINUE"
+- assertVisible: "eSIM Details"
+- tapOn: "CONTINUE"
+- assertVisible: "Order Details"
+
+- tapOn: "Pay Via Stripe"
+
+- runFlow:
+    when:
+        visible: "Card number"
+    file: add_creditcard.yaml
+
+- tapOn:
+    id: "primary_button"
+
+- assertVisible: "Paid"
+- tapOn: "View In My eSIM"
+- assertVisible: "Active"

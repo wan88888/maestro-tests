@@ -1,0 +1,6 @@
+appId: com.esim.free.travel.virtual.sim.esimnum.mobile
+---
+- tapOn: "Continue With Google"
+- tapOn:
+    id: "container"
+    index: 1

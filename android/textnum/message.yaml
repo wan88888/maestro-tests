@@ -5,8 +5,8 @@ appId: com.talknow.free.text.me.now.second.phone.number.burner.app
 - runFlow:
     when:
         visible: "Log in / Sign up"
-    file: textnum_login.yaml
-    
+    file: login.yaml
+
 - tapOn: "Message"
 - tapOn:
     id: "searchLayout"

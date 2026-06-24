@@ -1,0 +1,8 @@
+appId: com.esim.free.travel.virtual.sim.esimnum.mobile
+---
+- tapOn: "Card number"
+- inputText: "4242424242424242"
+- inputText: "1230"
+- inputText: "111"
+- inputText: "650000"
+- hideKeyboard
