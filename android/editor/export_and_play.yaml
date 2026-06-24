@@ -1,0 +1,11 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Export"
+- tapOn: "EXPORT"
+- assertVisible: "Video Saved,Enjoy!!!"
+- tapOn:
+    id: "ivPlay"
+- tapOn:
+    id: "playExitIv"
+- tapOn:
+    id: "ivHome"

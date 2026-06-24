@@ -1,0 +1,9 @@
+appId: vidma.video.editor.videomaker
+env:
+  PHOTO_INDEX: ${PHOTO_INDEX || 0}
+---
+- tapOn: "upload"
+- tapOn:
+    text: "Photo taken on.*"
+    index: ${PHOTO_INDEX}
+- tapOn: "Done"

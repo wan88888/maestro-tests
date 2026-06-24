@@ -1,0 +1,5 @@
+appId: vidma.video.editor.videomaker
+---
+- launchApp
+- runFlow: open_ailab.yaml
+- runFlow: ailab/image_to_image.yaml

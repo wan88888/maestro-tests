@@ -1,0 +1,12 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn:
+    id: "more"
+- tapOn:
+    id: "lLRename"
+- tapOn:
+    id: "fdDeleteView"
+- inputText: "test1"
+- tapOn:
+    id: "ivDone"
+- assertVisible: "test1"

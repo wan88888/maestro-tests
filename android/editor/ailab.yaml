@@ -1,0 +1,11 @@
+appId: vidma.video.editor.videomaker
+---
+- launchApp
+- runFlow: open_ailab.yaml
+- runFlow: ailab/text_to_video.yaml
+- runFlow: ailab/image_to_video.yaml
+- runFlow: ailab/text_to_image.yaml
+- runFlow: ailab/image_to_image.yaml
+- scroll
+- runFlow: ailab/ai_kiss.yaml
+- runFlow: ailab/ai_group.yaml

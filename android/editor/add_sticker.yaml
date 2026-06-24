@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Sticker"
+- tapOn:
+    id: "ivHistory"
+- tapOn:
+    id: "ivDone"
+- runFlow: close_panel.yaml

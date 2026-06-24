@@ -1,0 +1,4 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn:
+    id: "down"

@@ -1,0 +1,11 @@
+appId: vidma.video.editor.videomaker
+---
+- extendedWaitUntil:
+    visible: "Creation Saved, Enjoy!!!"
+    timeout: 120000
+
+- runFlow:
+    when:
+        visible:
+            id: "ratingBar"
+    file: dismiss_rating.yaml

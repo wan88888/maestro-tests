@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Audio"
+- tapOn: "Sound"
+- tapOn:
+    id: "itemLayout"
+- tapOn: "ADD"
+- runFlow: close_panel.yaml

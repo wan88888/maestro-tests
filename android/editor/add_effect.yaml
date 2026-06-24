@@ -1,0 +1,7 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Effect"
+- tapOn:
+    id: "ivVFXCover"
+- runFlow: confirm.yaml
+- runFlow: confirm.yaml

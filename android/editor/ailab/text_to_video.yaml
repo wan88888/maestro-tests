@@ -1,0 +1,9 @@
+appId: vidma.video.editor.videomaker
+tags:
+  - ailab
+  - text-to-video
+---
+- tapOn:
+    point: 3%,10%
+- tapOn: "Surprise me"
+- runFlow: ../generate_once.yaml

@@ -1,0 +1,5 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "credit"
+- runFlow: after_credit.yaml
+- tapOn: "Generate 1 More"

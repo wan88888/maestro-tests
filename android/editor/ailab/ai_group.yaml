@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+tags:
+  - ailab
+  - ai-group
+---
+- tapOn: "AI Group photo"
+- runFlow: ../pick_two_photos.yaml
+- runFlow: ../generate_once.yaml

@@ -1,0 +1,14 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn:
+    id: "clNewProject"
+- tapOn:
+    id: "ivIcon"
+- tapOn:
+    id: "ivNext"
+- tapOn:
+    id: "ratio"
+- tapOn:
+    id: "clRatioContainer"
+    index: 3
+- runFlow: confirm.yaml

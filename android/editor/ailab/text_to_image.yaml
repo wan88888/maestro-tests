@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+tags:
+  - ailab
+  - text-to-image
+---
+- tapOn: "Text to Image"
+- tapOn: "Surprise me"
+- runFlow: ../generate_once.yaml

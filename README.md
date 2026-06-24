@@ -15,6 +15,18 @@ maestro-tests/
 │   │   ├── login.yaml
 │   │   ├── add_creditcard.yaml
 │   │   └── user_purchase.yaml
+│   ├── editor/                     # Vidma 视频编辑器
+│   │   ├── new_project.yaml        # 主编排：新建项目全流程
+│   │   ├── ailab.yaml              # 主编排：AI Lab 全量回归
+│   │   ├── setup_project.yaml      # 子 flow
+│   │   ├── add_effect.yaml
+│   │   ├── generate_once.yaml
+│   │   ├── after_credit.yaml
+│   │   ├── dismiss_rating.yaml
+│   │   ├── run_text_to_video.yaml  # 单场景入口（含 launchApp）
+│   │   └── ailab/                  # 场景步骤（无 launchApp，供编排复用）
+│   │       ├── text_to_video.yaml
+│   │       └── ...
 │   └── sauce/
 │       └── login.yaml
 ├── ios/
@@ -44,6 +56,8 @@ maestro-tests/
 | `ios/sauce/login.yaml` | Swag Labs iOS 冒烟 |
 | `web/esimnum/checkout.yaml` | eSIMnum Web — 结账页未登录拦截 |
 | `web/sauce/login.yaml` | Sauce Demo 网站冒烟 |
+| `android/editor/new_project.yaml` | Vidma — 新建项目编辑导出全流程 |
+| `android/editor/ailab.yaml` | Vidma — AI Lab 六项生成全量回归 |
 
 同目录下多个 `login.yaml`（如 `android/textnum/login.yaml` 与 `android/sauce/login.yaml`）**不会混用**：`runFlow` 的 `file` 相对于当前 flow 所在目录解析。
 
@@ -91,13 +105,33 @@ maestro test ios/sauce/login.yaml
 maestro test -p web web/sauce/login.yaml
 ```
 
+### Vidma Editor（Android）
+
+```bash
+# 新建项目全流程
+maestro test android/editor/new_project.yaml
+
+# AI Lab 全量回归（单会话连续跑 6 个场景）
+maestro test android/editor/ailab.yaml
+
+# 单场景调试
+maestro test android/editor/run_text_to_video.yaml
+maestro test android/editor/run_image_to_video.yaml
+
+# 按 tag 筛选（Maestro 2.x）
+maestro test --include-tags text-to-image android/editor/ailab/
+```
+
+`ailab/` 下为场景步骤（假设已在 AI Lab 内）；`run_*.yaml` 含 `launchApp` 可单独执行。
+
 ## 编写约定
 
 1. **文件命名**：`{scenario}.yaml`，目录已表达平台与 App。
 2. **目录命名**：全小写（`textnum/`、`esimnum/`）。
-3. **子 flow 引用**：`runFlow` 的 `file` 只写同目录文件名（如 `login.yaml`）。
-4. **条件步骤**：用 `when` 跳过登录、Cookie 等可选 UI。
-5. **Web 视口**：无最大化选项，用 `--screen-size 1920x1080` 固定视口。
+3. **子 flow 引用**：`runFlow` 的 `file` 相对于当前 flow 所在目录；跨目录用 `../`（如 `ailab/` → `../generate_once.yaml`）。
+4. **长流程拆分**：主编排只做 `runFlow`；重复步骤（确认、关面板、生成、评星）抽成子 flow。
+5. **条件步骤**：用 `when` 跳过登录、Cookie、评星等可选 UI。
+6. **Web 视口**：无最大化选项，用 `--screen-size 1920x1080` 固定视口。
 
 ## 依赖与前提
 

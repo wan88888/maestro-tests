@@ -1,0 +1,10 @@
+appId: vidma.video.editor.videomaker
+---
+- runFlow:
+    file: pick_photo.yaml
+    env:
+      PHOTO_INDEX: 0
+- runFlow:
+    file: pick_photo.yaml
+    env:
+      PHOTO_INDEX: 1

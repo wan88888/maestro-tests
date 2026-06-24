@@ -1,0 +1,10 @@
+appId: vidma.video.editor.videomaker
+tags:
+  - ailab
+  - image-to-video
+---
+- tapOn: "Image to Video"
+- runFlow: ../pick_photo.yaml
+- tapOn:
+    point: 28%,61%
+- runFlow: ../generate_once.yaml

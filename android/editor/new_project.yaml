@@ -1,0 +1,11 @@
+appId: vidma.video.editor.videomaker
+---
+- launchApp
+- runFlow: setup_project.yaml
+- runFlow: add_effect.yaml
+- runFlow: add_audio.yaml
+- runFlow: add_text.yaml
+- runFlow: add_sticker.yaml
+- runFlow: add_filter.yaml
+- runFlow: export_and_play.yaml
+- runFlow: rename_project.yaml

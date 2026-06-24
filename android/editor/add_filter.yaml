@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Filter"
+- tapOn:
+    id: "ivIcon"
+    index: 1
+- runFlow: confirm.yaml
+- runFlow: close_panel.yaml

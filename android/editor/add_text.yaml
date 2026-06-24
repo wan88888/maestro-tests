@@ -1,0 +1,10 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn: "Text"
+- tapOn: "Add Text"
+- tapOn:
+    id: "riv"
+    index: 1
+- tapOn:
+    id: "saveImageView"
+- runFlow: close_panel.yaml

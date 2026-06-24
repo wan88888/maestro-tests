@@ -1,0 +1,6 @@
+appId: vidma.video.editor.videomaker
+---
+- tapOn:
+    text: "AI Lab"
+    index: 1
+- assertVisible: "title"
