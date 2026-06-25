@@ -1,0 +1,4 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- tapOn:
+    id: "ratingBar"

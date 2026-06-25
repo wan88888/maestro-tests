@@ -1,0 +1,5 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- runFlow:
+    file: open_notification.yaml
+- tapOn: ${BUTTON_TEXT}
