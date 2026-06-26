@@ -26,6 +26,14 @@ maestro-tests/
 │   │   └── ailab/                  # 场景步骤（无 launchApp，供编排复用）
 │   │       ├── text_to_video.yaml
 │   │       └── ...
+│   ├── downloader/                 # Downloader Top100
+│   │   ├── download_site.yaml      # 单 pass 编排
+│   │   ├── download_*_video.yaml   # 网站族入口（generate_suites 生成）
+│   │   ├── config/sites.yaml       # 唯一配置源
+│   │   ├── common/
+│   │   └── scripts/
+│   │       ├── generate_suites.py
+│   │       └── run_site.py
 │   └── sauce/
 │       └── login.yaml
 ├── ios/
@@ -122,6 +130,46 @@ maestro test --include-tags text-to-image android/editor/ailab/
 ```
 
 `ailab/` 下为场景步骤（假设已在 AI Lab 内）；`run_*.yaml` 含 `launchApp` 可单独执行。
+
+### Downloader（Android）
+
+**配置只写 `config/sites.yaml`**。网站族入口文件 `download_*_video.yaml` 由生成器维护，不要手改。
+
+```bash
+# 改配置后重新生成入口文件
+python3 android/downloader/scripts/generate_suites.py
+
+# 单站点（直接跑 download_site.yaml）
+python3 android/downloader/scripts/run_site.py --list
+python3 android/downloader/scripts/run_site.py xvideos
+python3 android/downloader/scripts/run_site.py xvideos --dry-run
+
+# 网站族（跑整组 download_*_video.yaml）
+python3 android/downloader/scripts/run_site.py --list-groups
+python3 android/downloader/scripts/run_site.py --group pornhub
+python3 android/downloader/scripts/run_site.py --group pornhub --dry-run
+
+# 手工单 pass（调试用）
+maestro test -e SITE_URL="www.xvideos.com" -e TAP_STRATEGY=coord \
+  -e TAP_X="50%" -e TAP_Y="33%" -e DOWNLOAD_STYLE=float -e TEARDOWN=true \
+  android/downloader/download_site.yaml
+
+# 内置 Tab / 特殊流程（暂未纳入 sites.yaml）
+maestro test android/downloader/download_dailymotion_video.yaml
+maestro test android/downloader/download_tiktok_video.yaml
+maestro test android/downloader/play_download_video.yaml
+```
+
+**参数说明**
+
+| 参数 | 说明 |
+|------|------|
+| `TAP_STRATEGY` | `coord`（主用）/ `play_button` / `card` / `search_only` |
+| `DOWNLOAD_STYLE` | `list`（item_cl→Download）/ `float`（downloadView）/ `probe`（仅验证按钮） |
+| `TEARDOWN_MODE` | `tabs`（默认，关下载列表 Tab）/ `home` / `home_stop`（Dailymotion） |
+| `HOME_PROBE` | `true` 时额外跑首页悬浮下载探测 |
+
+新增域名：在 `sites.yaml` 添加站点 key，加入对应 `groups` 成员，运行 `generate_suites.py`。
 
 ## 编写约定
 

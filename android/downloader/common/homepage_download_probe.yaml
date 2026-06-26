@@ -1,0 +1,10 @@
+appId: free.video.downloader.converter.music
+---
+- runFlow:
+    file: scroll_page.yaml
+- tapOn:
+    id: "completeLoadView"
+- tapOn:
+    id: "downloadView"
+- tapOn:
+    id: "ivClose"

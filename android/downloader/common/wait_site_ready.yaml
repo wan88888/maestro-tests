@@ -1,0 +1,9 @@
+appId: free.video.downloader.converter.music
+---
+- runFlow:
+    when:
+      true: ${READY_TEXT}
+    commands:
+      - extendedWaitUntil:
+          visible: ${READY_TEXT}
+          timeout: 60000

@@ -1,0 +1,13 @@
+appId: free.video.downloader.converter.music
+---
+- runFlow:
+    when:
+      true: ${SCROLL_BEFORE_TAP == 'true'}
+    file: ../scroll_page.yaml
+- tapOn:
+    point: "${TAP_X},${TAP_Y}"
+
+- runFlow:
+    file: ../wait_download_ready.yaml
+- runFlow:
+    file: ../tap_download.yaml

@@ -1,0 +1,7 @@
+appId: free.video.downloader.converter.music
+---
+- tapOn:
+    id: "ivSearch"
+- inputText: ${SITE_URL}
+- tapOn:
+    id: "ivSearch"

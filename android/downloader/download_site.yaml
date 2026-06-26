@@ -1,0 +1,35 @@
+appId: free.video.downloader.converter.music
+---
+- runFlow:
+    file: common/search_site.yaml
+- runFlow:
+    file: common/dismiss_agree.yaml
+- runFlow:
+    file: common/wait_site_ready.yaml
+
+- runFlow:
+    when:
+      true: ${HOME_PROBE == 'true'}
+    file: common/homepage_download_probe.yaml
+
+- runFlow:
+    when:
+      true: ${TAP_STRATEGY == 'search_only'}
+    file: common/strategies/search_only.yaml
+- runFlow:
+    when:
+      true: ${TAP_STRATEGY == 'card'}
+    file: common/strategies/card.yaml
+- runFlow:
+    when:
+      true: ${TAP_STRATEGY == 'play_button'}
+    file: common/strategies/play_button.yaml
+- runFlow:
+    when:
+      true: ${TAP_STRATEGY == 'coord'}
+    file: common/strategies/coord.yaml
+
+- runFlow:
+    when:
+      true: ${TEARDOWN == 'true'}
+    file: common/teardown.yaml

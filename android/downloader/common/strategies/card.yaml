@@ -1,0 +1,12 @@
+appId: free.video.downloader.converter.music
+---
+- runFlow:
+    file: ../scroll_page.yaml
+- tapOn:
+    index: 0
+    point: "50%,40%"
+
+- runFlow:
+    file: ../wait_download_ready.yaml
+- runFlow:
+    file: ../tap_download.yaml

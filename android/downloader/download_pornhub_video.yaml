@@ -1,0 +1,55 @@
+# Generated from config/sites.yaml — do not edit by hand.
+# Regenerate: python3 android/downloader/scripts/generate_suites.py
+appId: free.video.downloader.converter.music
+---
+- launchApp
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: www.pornhub.com
+      READY_TEXT: Pornhub Porn Videos
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "47%"
+      DOWNLOAD_STYLE: list
+      DISMISS_AGE: "I am 18 or older - Enter"
+      DISMISS_OK: Ok
+      HOME_PROBE: true
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: es.pornhub.com
+      READY_TEXT: Pornhub
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "47%"
+      DOWNLOAD_STYLE: list
+      HOME_PROBE: true
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: fr.pornhub.com
+      READY_TEXT: Pornhub
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "47%"
+      DOWNLOAD_STYLE: list
+      HOME_PROBE: true
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: pt.pornhub.com
+      READY_TEXT: Pornhub
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "47%"
+      DOWNLOAD_STYLE: list
+      HOME_PROBE: true
+      TEARDOWN: true

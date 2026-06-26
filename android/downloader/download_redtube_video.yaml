@@ -1,0 +1,43 @@
+# Generated from config/sites.yaml — do not edit by hand.
+# Regenerate: python3 android/downloader/scripts/generate_suites.py
+appId: free.video.downloader.converter.music
+---
+- launchApp
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: redtube.com
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "48%"
+      DOWNLOAD_STYLE: list
+      DISMISS_AGE: "I am 18 or older - Enter"
+      DISMISS_COOKIE: Close Cookie Banner
+      SCROLL_BEFORE_TAP: true
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: redtube.com.br
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "48%"
+      DOWNLOAD_STYLE: list
+      DISMISS_AGE: "I am 18 or older - Enter"
+      DISMISS_COOKIE: Close Cookie Banner
+      SCROLL_BEFORE_TAP: true
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: txxx.com
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "48%"
+      DOWNLOAD_STYLE: float
+      DISMISS_ENTER: Enter
+      SCROLL_BEFORE_TAP: true
+      TEARDOWN: true

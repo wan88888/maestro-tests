@@ -1,0 +1,188 @@
+# Downloader Top100 — 唯一配置源
+#
+# 1. 在下方添加/修改站点 key
+# 2. 在 groups 里维护网站族成员顺序
+# 3. 运行: python3 android/downloader/scripts/generate_suites.py
+#
+# tap_strategy: search_only | card | play_button | coord
+# download_style: list | float | probe
+#   list  - item_cl → Download（角标>1）
+#   float - downloadView（角标>1）
+#   probe - 仅验证 completeLoadView 出现
+# teardown_mode: tabs（默认）| home | home_stop
+# scroll_before_tap: coord 策略点击前是否先 scroll
+
+xvideos:
+  url: www.xvideos.com
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "33%"
+  download_style: float
+  teardown: true
+
+xvideos_xhwide:
+  url: xhwide5.com
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "33%"
+  download_style: float
+  teardown: true
+
+xnxx_es:
+  url: www.xnxx.es
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "33%"
+  download_style: probe
+  teardown: true
+
+xnxx_arabic:
+  url: www.xnxx-arabic.com
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "33%"
+  download_style: float
+  teardown: true
+
+redtube:
+  url: redtube.com
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "48%"
+  download_style: list
+  scroll_before_tap: true
+  teardown: true
+  dismiss_age: "I am 18 or older - Enter"
+  dismiss_cookie: "Close Cookie Banner"
+
+redtube_br:
+  url: redtube.com.br
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "48%"
+  download_style: list
+  scroll_before_tap: true
+  teardown: true
+  dismiss_age: "I am 18 or older - Enter"
+  dismiss_cookie: "Close Cookie Banner"
+
+redtube_txxx:
+  url: txxx.com
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "48%"
+  download_style: float
+  scroll_before_tap: true
+  teardown: true
+  dismiss_enter: "Enter"
+
+spankbang:
+  url: spankbang.com
+  tap_strategy: coord
+  tap_x: "26%"
+  tap_y: "80%"
+  download_style: list
+  teardown: true
+  dismiss_enter: "Enter"
+
+spankbang_la:
+  url: la.spankbang.com
+  tap_strategy: coord
+  tap_x: "26%"
+  tap_y: "80%"
+  download_style: list
+  teardown: true
+  dismiss_enter: "Enter"
+
+xhamster:
+  url: xhamster.com
+  tap_strategy: coord
+  tap_x: "2%"
+  tap_y: "53%"
+  download_style: list
+  teardown: true
+  dismiss_age: "I'm 18 or older — enter xHamster"
+
+xhamster_xhwide:
+  url: xhwide5.com
+  tap_strategy: coord
+  tap_x: "2%"
+  tap_y: "53%"
+  download_style: list
+  teardown: true
+
+xhamster_desi:
+  url: xhamster.desi
+  tap_strategy: coord
+  tap_x: "2%"
+  tap_y: "53%"
+  download_style: float
+  teardown: true
+  dismiss_age: "I'm 18 or older — enter xHamster"
+
+pornhub:
+  url: www.pornhub.com
+  ready_text: "Pornhub Porn Videos"
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "47%"
+  download_style: list
+  home_probe: true
+  teardown: true
+  dismiss_age: "I am 18 or older - Enter"
+  dismiss_ok: "Ok"
+
+pornhub_es:
+  url: es.pornhub.com
+  ready_text: "Pornhub"
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "47%"
+  download_style: list
+  home_probe: true
+  teardown: true
+
+pornhub_fr:
+  url: fr.pornhub.com
+  ready_text: "Pornhub"
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "47%"
+  download_style: list
+  home_probe: true
+  teardown: true
+
+pornhub_pt:
+  url: pt.pornhub.com
+  ready_text: "Pornhub"
+  tap_strategy: coord
+  tap_x: "50%"
+  tap_y: "47%"
+  download_style: list
+  home_probe: true
+  teardown: true
+
+# 网站族：成员顺序即多 pass 执行顺序；改成员后运行 generate_suites.py
+groups:
+  pornhub:
+    - pornhub
+    - pornhub_es
+    - pornhub_fr
+    - pornhub_pt
+  xvideos:
+    - xvideos
+    - xvideos_xhwide
+  xnxx:
+    - xnxx_es
+    - xnxx_arabic
+  redtube:
+    - redtube
+    - redtube_br
+    - redtube_txxx
+  spankbang:
+    - spankbang
+    - spankbang_la
+  xhamster:
+    - xhamster
+    - xhamster_xhwide
+    - xhamster_desi

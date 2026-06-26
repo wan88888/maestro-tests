@@ -1,0 +1,25 @@
+# Generated from config/sites.yaml — do not edit by hand.
+# Regenerate: python3 android/downloader/scripts/generate_suites.py
+appId: free.video.downloader.converter.music
+---
+- launchApp
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: www.xvideos.com
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "33%"
+      DOWNLOAD_STYLE: float
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: xhwide5.com
+      TAP_STRATEGY: coord
+      TAP_X: "50%"
+      TAP_Y: "33%"
+      DOWNLOAD_STYLE: float
+      TEARDOWN: true

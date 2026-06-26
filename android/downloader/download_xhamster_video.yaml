@@ -1,0 +1,37 @@
+# Generated from config/sites.yaml — do not edit by hand.
+# Regenerate: python3 android/downloader/scripts/generate_suites.py
+appId: free.video.downloader.converter.music
+---
+- launchApp
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: xhamster.com
+      TAP_STRATEGY: coord
+      TAP_X: "2%"
+      TAP_Y: "53%"
+      DOWNLOAD_STYLE: list
+      DISMISS_AGE: "I'm 18 or older — enter xHamster"
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: xhwide5.com
+      TAP_STRATEGY: coord
+      TAP_X: "2%"
+      TAP_Y: "53%"
+      DOWNLOAD_STYLE: list
+      TEARDOWN: true
+
+- runFlow:
+    file: download_site.yaml
+    env:
+      SITE_URL: xhamster.desi
+      TAP_STRATEGY: coord
+      TAP_X: "2%"
+      TAP_Y: "53%"
+      DOWNLOAD_STYLE: float
+      DISMISS_AGE: "I'm 18 or older — enter xHamster"
+      TEARDOWN: true

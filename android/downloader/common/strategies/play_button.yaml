@@ -1,0 +1,14 @@
+appId: free.video.downloader.converter.music
+---
+- tapOn:
+    containsDescendants:
+      - text: "Like"
+      - text: "Bookmark"
+      - text: "Share"
+    index: 0
+    point: "50%,35%"
+
+- runFlow:
+    file: ../wait_download_ready.yaml
+- runFlow:
+    file: ../tap_download.yaml
