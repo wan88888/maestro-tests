@@ -1,46 +1,8 @@
 appId: vidma.screenrecorder.videorecorder.videoeditor.pro
 ---
-- launchApp:
-    permissions:
-      all: allow
-
-- tapOn:
-    id: "ivRecorder"
-- tapOn: "Start now"
-
-- launchApp:
-    appId: com.zhiliaoapp.musically
-    stopApp: false
-
-- extendedWaitUntil:
-    visible: "For You"
-    timeout: 60000
-
-- repeat:
-    times: 5
-    commands:
-      - swipe:
-          direction: UP
-          waitToSettleTimeoutMs: 1000
-      - runScript:
-          file: sleep.js
-          env:
-            MILLISECONDS: 2000
-
-- launchApp:
-    appId: vidma.screenrecorder.videorecorder.videoeditor.pro
-    stopApp: false
-
-- tapOn: "Stop"
-- runFlow:
-    when:
-        visible:
-            id: "ratingBar"
-    file: dismiss_rating.yaml
-
-- tapOn:
-    id: "ivPlay"
-- pressKey: back
-- stopApp:
-    appId: com.zhiliaoapp.musically
-- stopApp
+- runFlow: launch_recorder.yaml
+- runFlow: start_in_app.yaml
+- runFlow: browse_tiktok.yaml
+- runFlow: stop_in_app.yaml
+- runFlow: finish_with_close.yaml
+- runFlow: teardown.yaml

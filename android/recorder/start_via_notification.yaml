@@ -1,0 +1,7 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- runFlow:
+    file: notification_tap.yaml
+    env:
+      BUTTON_TEXT: "Record"
+- tapOn: "Start now"

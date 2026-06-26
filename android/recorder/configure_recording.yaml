@@ -1,0 +1,20 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- tapOn: "Audio"
+- tapOn:
+    id: "lLMicInternal"
+- tapOn: "Navigate up"
+
+- tapOn:
+    text: "Video"
+    index: 1
+- tapOn:
+    id: "hd"
+- tapOn: "1080P"
+- tapOn:
+    id: "hq"
+- tapOn: "Excellent Quality"
+- tapOn:
+    id: "fps"
+- tapOn: "120FPS"
+- tapOn: "Navigate up"

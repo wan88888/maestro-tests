@@ -1,0 +1,11 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- runFlow:
+    when:
+        visible:
+            id: "ratingBar"
+    commands:
+      - back
+
+- tapOn:
+    id: "ivClose"

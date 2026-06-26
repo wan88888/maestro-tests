@@ -1,67 +1,9 @@
 appId: vidma.screenrecorder.videorecorder.videoeditor.pro
 ---
-- launchApp:
-    permissions:
-      all: allow
-
-- tapOn: "Audio"
-- tapOn:
-    id: "lLMicInternal"
-- tapOn: "Navigate up"
-
-- tapOn:
-    text: "Video"
-    index: 1
-- tapOn:
-    id: "hd"
-- tapOn: "1080P"
-- tapOn:
-    id: "hq"
-- tapOn: "Excellent Quality"
-- tapOn:
-    id: "fps"
-- tapOn: "120FPS"
-- tapOn: "Navigate up"
-
-- runFlow:
-    file: notification_tap.yaml
-    env:
-      BUTTON_TEXT: "Record"
-- tapOn: "Start now"
-
-- launchApp:
-    appId: com.zhiliaoapp.musically
-    stopApp: false
-
-- extendedWaitUntil:
-    visible: "For You"
-    timeout: 60000
-
-- repeat:
-    times: 5
-    commands:
-      - swipe:
-          direction: UP
-          waitToSettleTimeoutMs: 1000
-      - runScript:
-          file: sleep.js
-          env:
-            MILLISECONDS: 2000
-
-- runFlow:
-    file: notification_tap.yaml
-    env:
-      BUTTON_TEXT: "Stop"
-
-- runFlow:
-    when:
-        visible:
-            id: "ratingBar"
-    file: dismiss_rating.yaml    
-
-- tapOn:
-    id: "ivClose"
-
-- stopApp:
-    appId: com.zhiliaoapp.musically
-- stopApp
+- runFlow: launch_recorder.yaml
+- runFlow: configure_recording.yaml
+- runFlow: start_via_notification.yaml
+- runFlow: browse_tiktok.yaml
+- runFlow: stop_via_notification.yaml
+- runFlow: finish_with_close.yaml
+- runFlow: teardown.yaml

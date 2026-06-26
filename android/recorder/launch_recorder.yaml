@@ -1,0 +1,5 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- launchApp:
+    permissions:
+      all: allow

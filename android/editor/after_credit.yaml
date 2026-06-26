@@ -8,4 +8,5 @@ appId: vidma.video.editor.videomaker
     when:
         visible:
             id: "ratingBar"
-    file: dismiss_rating.yaml
+    commands:
+      - back

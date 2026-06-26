@@ -1,6 +1,0 @@
-appId: vidma.video.editor.videomaker
----
-- tapOn:
-    id: "ratingBar"
-- tapOn:
-    id: "ivCloseDialog"

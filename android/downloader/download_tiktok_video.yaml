@@ -1,0 +1,25 @@
+appId: free.video.downloader.converter.music
+---
+- launchApp
+- tapOn: "TikTok"
+- tapOn:
+    id: "btnOpenApp"
+
+- extendedWaitUntil:
+    visible: "For You"
+    timeout: 60000
+
+- tapOn:
+    id: "uh6"
+- tapOn: "Copy link"
+
+- launchApp:
+    appId: free.video.downloader.converter.music
+    stopApp: false
+
+- assertVisible: "Analyzing Link…"
+- tapOn:
+    id: "ivClose"
+- stopApp:
+    appId: com.zhiliaoapp.musically
+- stopApp

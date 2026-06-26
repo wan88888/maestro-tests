@@ -1,0 +1,7 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- launchApp:
+    appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+    stopApp: false
+
+- tapOn: "Stop"

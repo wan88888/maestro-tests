@@ -1,0 +1,20 @@
+appId: vidma.screenrecorder.videorecorder.videoeditor.pro
+---
+- launchApp:
+    appId: com.zhiliaoapp.musically
+    stopApp: false
+
+- extendedWaitUntil:
+    visible: "For You"
+    timeout: 60000
+
+- repeat:
+    times: 5
+    commands:
+      - swipe:
+          direction: UP
+          waitToSettleTimeoutMs: 1000
+      - runScript:
+          file: sleep.js
+          env:
+            MILLISECONDS: 2000

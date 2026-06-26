@@ -22,7 +22,6 @@ maestro-tests/
 │   │   ├── add_effect.yaml
 │   │   ├── generate_once.yaml
 │   │   ├── after_credit.yaml
-│   │   ├── dismiss_rating.yaml
 │   │   ├── run_text_to_video.yaml  # 单场景入口（含 launchApp）
 │   │   └── ailab/                  # 场景步骤（无 launchApp，供编排复用）
 │   │       ├── text_to_video.yaml

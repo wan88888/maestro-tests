@@ -1,0 +1,39 @@
+appId: free.video.downloader.converter.music
+androidWebViewHierarchy: devtools
+---
+- launchApp
+- tapOn: "Dailymotion"
+
+- runFlow:
+    when:
+        visible: "I understand"
+    commands:
+      - tapOn: "I understand"
+
+- extendedWaitUntil:
+    visible: "Like"
+    timeout: 60000
+
+- tapOn:
+    containsDescendants:
+      - text: "Like"
+      - text: "Bookmark"
+      - text: "Share"
+    index: 0
+    point: "50%,35%"
+
+- extendedWaitUntil:
+    visible:
+        id: "completeLoadView"
+    timeout: 60000
+- tapOn:
+    id: "completeLoadView"
+
+- tapOn:
+    id: "item_cl"
+- tapOn: "Download"
+- tapOn:
+    id: "ivClose"
+- tapOn:
+    id: "ivGoHome"
+- stopApp    
