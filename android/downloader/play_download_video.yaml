@@ -6,11 +6,9 @@ appId: free.video.downloader.converter.music
 - tapOn:
     id: "downloading_item_root_view"
 
-- runFlow:
-    when:
-        visible: "Skip"
-    commands:
-      - tapOn: "Skip"
+- tapOn:
+    text: "Skip"
+    optional: true
 
 - back
 - stopApp

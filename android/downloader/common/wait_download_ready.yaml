@@ -1,6 +1,0 @@
-appId: free.video.downloader.converter.music
----
-- extendedWaitUntil:
-    visible:
-      id: "completeLoadView"
-    timeout: 60000

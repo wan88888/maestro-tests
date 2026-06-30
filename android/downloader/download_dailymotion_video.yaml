@@ -4,11 +4,9 @@ androidWebViewHierarchy: devtools
 - launchApp
 - tapOn: "Dailymotion"
 
-- runFlow:
-    when:
-        visible: "I understand"
-    commands:
-      - tapOn: "I understand"
+- tapOn:
+    text: "I understand"
+    optional: true
 
 - extendedWaitUntil:
     visible: "Like"
@@ -34,8 +32,7 @@ androidWebViewHierarchy: devtools
 - tapOn: "Download"
 - tapOn:
     id: "ivClose"
-- runFlow:
-    file: common/teardown.yaml
-    env:
-      TEARDOWN: true
-      TEARDOWN_MODE: home_stop    
+- tapOn:
+    id: "ivGoHome"
+    optional: true
+- stopApp    

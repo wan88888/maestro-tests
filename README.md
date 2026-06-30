@@ -26,14 +26,10 @@ maestro-tests/
 │   │   └── ailab/                  # 场景步骤（无 launchApp，供编排复用）
 │   │       ├── text_to_video.yaml
 │   │       └── ...
-│   ├── downloader/                 # Downloader Top100
-│   │   ├── download_site.yaml      # 单 pass 编排
-│   │   ├── download_*_video.yaml   # 网站族入口（generate_suites 生成）
-│   │   ├── config/sites.yaml       # 唯一配置源
-│   │   ├── common/
-│   │   └── scripts/
-│   │       ├── generate_suites.py
-│   │       └── run_site.py
+│   ├── downloader/                 # Downloader（独立 flow，无公共骨架）
+│   │   ├── download_dailymotion_video.yaml
+│   │   ├── download_tiktok_video.yaml
+│   │   └── play_download_video.yaml
 │   └── sauce/
 │       └── login.yaml
 ├── ios/
@@ -65,6 +61,9 @@ maestro-tests/
 | `web/sauce/login.yaml` | Sauce Demo 网站冒烟 |
 | `android/editor/new_project.yaml` | Vidma — 新建项目编辑导出全流程 |
 | `android/editor/ailab.yaml` | Vidma — AI Lab 六项生成全量回归 |
+| `android/downloader/download_dailymotion_video.yaml` | Downloader — Dailymotion 内置 Tab 下载 |
+| `android/downloader/download_tiktok_video.yaml` | Downloader — TikTok 复制链接下载 |
+| `android/downloader/play_download_video.yaml` | Downloader — 播放已下载视频 |
 
 同目录下多个 `login.yaml`（如 `android/textnum/login.yaml` 与 `android/sauce/login.yaml`）**不会混用**：`runFlow` 的 `file` 相对于当前 flow 所在目录解析。
 
@@ -133,43 +132,21 @@ maestro test --include-tags text-to-image android/editor/ailab/
 
 ### Downloader（Android）
 
-**配置只写 `config/sites.yaml`**。网站族入口文件 `download_*_video.yaml` 由生成器维护，不要手改。
+当前为**独立 flow**，每个站点单独维护，暂无公共骨架（`common/`、`download_site.yaml`、`sites.yaml` 已移除）。
 
 ```bash
-# 改配置后重新生成入口文件
-python3 android/downloader/scripts/generate_suites.py
-
-# 单站点（直接跑 download_site.yaml）
-python3 android/downloader/scripts/run_site.py --list
-python3 android/downloader/scripts/run_site.py xvideos
-python3 android/downloader/scripts/run_site.py xvideos --dry-run
-
-# 网站族（跑整组 download_*_video.yaml）
-python3 android/downloader/scripts/run_site.py --list-groups
-python3 android/downloader/scripts/run_site.py --group pornhub
-python3 android/downloader/scripts/run_site.py --group pornhub --dry-run
-
-# 手工单 pass（调试用）
-maestro test -e SITE_URL="www.xvideos.com" -e TAP_STRATEGY=coord \
-  -e TAP_X="50%" -e TAP_Y="33%" -e DOWNLOAD_STYLE=float -e TEARDOWN=true \
-  android/downloader/download_site.yaml
-
-# 内置 Tab / 特殊流程（暂未纳入 sites.yaml）
 maestro test android/downloader/download_dailymotion_video.yaml
 maestro test android/downloader/download_tiktok_video.yaml
 maestro test android/downloader/play_download_video.yaml
 ```
 
-**参数说明**
+| Flow | 说明 | 状态 |
+|------|------|------|
+| `download_dailymotion_video.yaml` | App 内置 Dailymotion Tab，选视频后 list 下载 | 待设备验证 |
+| `download_tiktok_video.yaml` | 跳转 TikTok 复制链接，回 App 解析 | 待设备验证 |
+| `play_download_video.yaml` | 打开下载列表播放已下载项 | 待设备验证 |
 
-| 参数 | 说明 |
-|------|------|
-| `TAP_STRATEGY` | `coord`（主用）/ `play_button` / `card` / `search_only` |
-| `DOWNLOAD_STYLE` | `list`（item_cl→Download）/ `float`（downloadView）/ `probe`（仅验证按钮） |
-| `TEARDOWN_MODE` | `tabs`（默认，关下载列表 Tab）/ `home` / `home_stop`（Dailymotion） |
-| `HOME_PROBE` | `true` 时额外跑首页悬浮下载探测 |
-
-新增域名：在 `sites.yaml` 添加站点 key，加入对应 `groups` 成员，运行 `generate_suites.py`。
+Top100 其余站点用例尚未纳入；后续可按站点逐步新增 `download_*_video.yaml`。
 
 ## 编写约定
 
@@ -183,4 +160,5 @@ maestro test android/downloader/play_download_video.yaml
 ## 依赖与前提
 
 - **TextNum**：设备已登录 Google 账号；拨号/短信需真机或具备相应能力的模拟环境。
+- **Downloader**：真机或模拟器已安装 `free.video.downloader.converter.music`；WebView 站点 UI 易变，各 flow 需单独维护与验证。
 - **Sauce Demo**：账号 `standard_user` / `secret_sauce`（已写在 flow 中）。
