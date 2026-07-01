@@ -2,7 +2,10 @@ appId: vidma.video.editor.videomaker
 ---
 - tapOn: "Export"
 - tapOn: "EXPORT"
-- assertVisible: "Video Saved,Enjoy!!!"
+- runFlow:
+    file: wait_for_success.yaml
+    env:
+      SUCCESS_TEXT: "Video Saved,Enjoy!!!"
 - tapOn:
     id: "ivPlay"
 - tapOn:

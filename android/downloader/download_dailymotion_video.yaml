@@ -15,8 +15,6 @@ androidWebViewHierarchy: devtools
 - tapOn:
     containsDescendants:
       - text: "Like"
-      - text: "Bookmark"
-      - text: "Share"
     index: 0
     point: "50%,35%"
 
@@ -24,15 +22,22 @@ androidWebViewHierarchy: devtools
     visible:
         id: "completeLoadView"
     timeout: 60000
+
 - tapOn:
     id: "completeLoadView"
 
 - tapOn:
     id: "item_cl"
+
 - tapOn: "Download"
+
 - tapOn:
     id: "ivClose"
+
 - tapOn:
-    id: "ivGoHome"
-    optional: true
-- stopApp    
+    id: "ivTabs2"
+
+- tapOn:
+    id: "ivClose"
+
+- stopApp

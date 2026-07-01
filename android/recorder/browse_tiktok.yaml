@@ -13,8 +13,6 @@ appId: vidma.screenrecorder.videorecorder.videoeditor.pro
     commands:
       - swipe:
           direction: UP
-          waitToSettleTimeoutMs: 1000
-      - runScript:
-          file: sleep.js
-          env:
-            MILLISECONDS: 2000
+          waitToSettleTimeoutMs: 2000
+      - waitForAnimationToEnd:
+          timeout: 3000

@@ -1,0 +1,8 @@
+appId: vidma.video.editor.videomaker
+---
+- runFlow:
+    when:
+        visible:
+            id: "ratingBar"
+    commands:
+      - back

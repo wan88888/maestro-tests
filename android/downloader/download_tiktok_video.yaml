@@ -9,8 +9,7 @@ appId: free.video.downloader.converter.music
     visible: "For You"
     timeout: 60000
 
-- tapOn:
-    id: "uh6"
+- tapOn: "Share.*"
 - tapOn: "Copy link"
 
 - launchApp:

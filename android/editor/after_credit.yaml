@@ -1,12 +1,6 @@
 appId: vidma.video.editor.videomaker
 ---
-- extendedWaitUntil:
-    visible: "Creation Saved, Enjoy!!!"
-    timeout: 120000
-
 - runFlow:
-    when:
-        visible:
-            id: "ratingBar"
-    commands:
-      - back
+    file: wait_for_success.yaml
+    env:
+      SUCCESS_TEXT: "Creation Saved, Enjoy!!!"

@@ -1,0 +1,15 @@
+appId: vidma.video.editor.videomaker
+env:
+  SUCCESS_TEXT: ${SUCCESS_TEXT}
+  WAIT_SECONDS: ${WAIT_SECONDS || "120"}
+---
+# 成功文案可见即结束；评星偶发且会遮挡，每轮尝试 dismiss
+- repeat:
+    times: ${WAIT_SECONDS}
+    while:
+      notVisible: ${SUCCESS_TEXT}
+    commands:
+      - runFlow: dismiss_rating_if_visible.yaml
+      - waitForAnimationToEnd:
+          timeout: 1000
+- assertVisible: ${SUCCESS_TEXT}

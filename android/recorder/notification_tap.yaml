@@ -1,5 +1,11 @@
 appId: vidma.screenrecorder.videorecorder.videoeditor.pro
 ---
-- runFlow:
-    file: open_notification.yaml
+- repeat:
+    times: 5
+    while:
+      notVisible: ${BUTTON_TEXT}
+    commands:
+      - runFlow: open_notification.yaml
+      - waitForAnimationToEnd:
+          timeout: 500
 - tapOn: ${BUTTON_TEXT}
